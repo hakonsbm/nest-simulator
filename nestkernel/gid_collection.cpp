@@ -393,21 +393,17 @@ GIDCollectionComposite::GIDCollectionComposite(
   size_t start,
   size_t stop,
   size_t step )
-  : size_( 0 )
-  , step_( 1 )
+  : size_( floor( ( stop - start ) / ( float ) step )
+      + ( ( stop - start ) % step > 0 ) )
+  , step_( step )
   , start_part_( 0 )
   , start_offset_( 0 )
-  , stop_part_( 0 )
+  , stop_part_( 1 )
   , stop_offset_( 0 )
 {
-  for ( const_iterator it = primitive.begin() + start;
-        it < primitive.begin() + stop;
-        it += step )
-  {
-    parts_.push_back(
-      GIDCollectionPrimitive( ( *it ).gid, ( *it ).gid, ( *it ).model_id ) );
-    ++size_;
-  }
+  parts_.push_back(
+    GIDCollectionPrimitive( ( *( primitive.begin() + start ) ).gid,
+      ( *( primitive.begin() + ( stop - 1 ) ) ).gid ) );
 }
 
 GIDCollectionComposite::GIDCollectionComposite(
@@ -495,10 +491,6 @@ GIDCollectionComposite::GIDCollectionComposite(
     }
     ++global_index;
   }
-  std::cout << "START: part=" << start_part_ << " | element=" << start_offset_
-            << std::endl;
-  std::cout << "STOP: part=" << stop_part_ << " | element=" << stop_offset_
-            << std::endl;
 }
 
 GIDCollectionPTR GIDCollectionComposite::operator+( GIDCollectionPTR rhs ) const
