@@ -1,0 +1,197 @@
+((*- extends 'report.tplx' -*))
+
+((* set cell_style = 'style_python.tplx' *))
+
+((* block packages *))
+  \usepackage{url}
+  \usepackage{tabularx}
+  \usepackage{listings}
+  \usepackage[table]{xcolor}
+  ((( super() )))
+((* endblock packages *))
+
+((* block definitions *))
+  ((( super() )))
+
+  \makeindex
+
+  \renewcommand{\abstractname}{About the Topology Module}
+
+\title{NEST Topology User Manual}
+\author{Hans Ekkehard Plesser\\[1ex]
+Håkon Enger\\[1ex]
+\normalsize Department of Mathematical Sciences and Technology\\\normalsize Norwegian University of Life Sciences\\
+\normalsize 1432 Ås, Norway}
+\date{NEST 2.12\\[8cm]
+\centerline{\includegraphics{../../extras/logos/nest-initiative.pdf}}}
+
+\definecolor{lstcolor}{gray}{0.9}
+((* endblock definitions *))
+
+((* block abstract *))
+\begin{abstract}
+  This user manual gives a short introduction to the use of the
+  Topology Module for the NEST Neural Simulation Tool.
+
+  Rüdiger Kupper wrote a first topology library for NEST many years
+  ago entirely in SLI (actually, it pre-dates the NEST kernel).  Kittel
+  Austvoll and Hans Ekkehard Plesser designed and wrote a completely
+  new Topology library in 2007/8. That library has been available with
+  the NEST 1.9.x pre-releases since.
+
+  For NEST 2.0, Håkon Enger and Hans Ekkehard Plesser re-factored
+  parts of the Topology library code, improved and extended the PyNEST
+  interface for the Topology library, fixed bugs and added tests.
+
+  For NEST 2.2, Håkon Enger rewrote most of the Topology library code,
+  thereby improving performance considerably.
+
+  This User Manual describes the NEST 2.12 version of the NEST Topology
+  Library. There have been no major changes to the Topology library since 
+  NEST 2.2, although Topology functions check their arguments more carefully
+  since NEST 2.6.
+
+  We plan further improvements to the Topology Module in the future, 
+  which may include changes to the API to remove some of the remaining
+  inconsistencies and provide a cleaner user interface.
+
+  \vspace*{\fill}{\centerline{\footnotesize{Copyright \copyright{} 2004 The NEST Initiative}}}
+\end{abstract}
+((* endblock abstract *))
+
+((* block markdowncell *))
+    
+    ((*- if not cell.metadata.get('table_con', {}) and not cell.metadata.get('table_param', {}) and not cell.metadata.get('table_q_func', {}) and not cell.metadata.get('table_v_func', {}) and not cell.metadata.get('title', {}) and not cell.metadata.get('bib', {})-*))
+      ((( super() )))
+    ((*- endif -*))
+    ((*- if cell.metadata.get('table_con', {}) -*))
+      \begin{center}
+      \begin{tabular}{l||l|l}
+      Connection type  & Driver & Pool \\\hline\hline
+      convergent  & target layer & source layer \\\hline
+      divergent   & source layer & target layer
+      \end{tabular}
+      \end{center}
+    ((*- endif -*))
+    ((*- if cell.metadata.get('table_param', {}) -*))
+\begin{table}
+\begin{tabularx}{\linewidth}{l|p{0.2\linewidth}|X}
+Name & Parameters & Function \\\hline
+%
+\rowcolor{lstcolor} 
+constant & & {constant $p\in[0,1]$} \\
+%
+\lstinline!linear! & \lstinline!a!, \lstinline!c! &
+\begin{equation*}
+p(d) = c + a d
+\end{equation*}\\
+%
+\rowcolor{lstcolor}
+\lstinline!exponential! & \lstinline!a!, \lstinline!c!, \lstinline!tau! &
+\begin{equation*}
+p(d) = c + a e^{-\frac{d}{\tau}}
+\end{equation*}\\
+%
+\lstinline!gaussian! & \lstinline!p_center!, \lstinline!sigma!, \lstinline!mean!,
+\lstinline!c! &
+\begin{equation*}
+p(d) = c + p_{\text{center}}  e^{-\frac{(d-\mu)^2}{2\sigma^2}}
+\end{equation*}\\
+%
+\rowcolor{lstcolor}
+\lstinline!gaussian2D! & \lstinline!p_center!, \lstinline!sigma_x!, 
+\lstinline!sigma_y!, \lstinline!mean_x!, \lstinline!mean_y!,\lstinline!rho!
+\lstinline!c! &
+\begin{equation*}
+p(d) = c + p_{\text{center}}
+e^{-\frac{\frac{(d_x-\mu_x)^2}{\sigma_x^2}-\frac{(d_y-\mu_y)^2}{\sigma_y^2}
+          +2\rho\frac{(d_x-\mu_x)(d_y-\mu_y)}{\sigma_x\sigma_y}}{2(1-\rho^2)}}
+\end{equation*}\\\hline\hline
+\lstinline!uniform! & \lstinline!min!, \lstinline!max! & $p\in
+[\text{min},\text{max})$ uniformly \\
+%
+\rowcolor{lstcolor}
+\lstinline!normal! &
+\lstinline!mean!, \lstinline!sigma!, \lstinline!min!, \lstinline!max! &
+$p \in [\text{min},\text{max})$ normal with given mean and $\sigma$ \\
+%
+\lstinline!lognormal! &
+\lstinline!mu!, \lstinline!sigma!, \lstinline!min!, \lstinline!max! &
+$p \in [\text{min},\text{max})$ lognormal with given $\mu$ and $\sigma$ \\
+%
+\end{tabularx}
+\caption[Kernel functions]{Functions currently available in the
+  Topology module. $d$ is the distance and $(d_x,d_y)$ the
+  displacement. All functions can be used to specify weights and
+  delays, but only the constant and the distance-dependent functions,
+  i.e., all functions above the double line,
+  can be used as kernels. }
+\label{tab:kernels}
+\end{table}
+    ((*- endif -*))
+    ((*- if cell.metadata.get('table_q_func', {}) -*))
+      \renewcommand{\arraystretch}{1.2}
+      \begin{longtable}{lp{0.6\linewidth}}
+        \lstinline!nest.PrintNetwork()! & Print structure of network or
+        subnet
+        from NEST perspective. \\
+        \lstinline!nest.GetConnections()! & Retrieve connections
+        (all or for a given source or target); see also
+        \url{http://www.nest-simulator.org/connection_management}. \\
+        \lstinline!nest.GetNodes()! & Applied to a layer, returns GIDs of
+        the layer elements. For simple layers, these are the actual model
+        neurons,
+        for composite layers the top-level subnets.\\
+        \lstinline!nest.GetLeaves()! & Applied to a layer, returns GIDs of
+        all
+        actual model neurons, ignoring subnets.\\
+        \lstinline!tp.GetPosition()!  &
+        Return the spatial locations of nodes.\\
+        \lstinline!tp.GetLayer()!  &
+        Return the layer to which nodes belong.\\
+        \lstinline!tp.GetElement()!  &
+        Return the node(s) at the location(s) in the given grid-based layer(s).\\
+        \lstinline!tp.GetTargetNodes()!  &
+        Obtain targets of a list of sources in a given target layer.\\
+        \lstinline!tp.GetTargetPositions()!  &
+        Obtain positions of targets of a list of sources in a given target layer.\\
+        \lstinline!tp.FindNearestElement()!  & Return the node(s) closest to
+        the location(s) in the given
+        layer(s).\\
+        \lstinline!tp.FindCenterElement()!  &
+        Return GID(s) of node closest to center of layer(s).\\
+        \lstinline!tp.Displacement()!  & Obtain vector of lateral
+        displacement between nodes, taking
+        periodic boundary conditions into account. \\
+        \lstinline!tp.Distance()!  & Obtain vector of lateral distances
+        between nodes, taking periodic
+        boundary conditions into account.\\
+        \lstinline!tp.DumpLayerNodes()!  &
+        Write layer element positions to file.\\
+        \lstinline!tp.DumpLayerConnections()!  & Write connectivity
+        information to file. This function may be very useful to check that
+        Topology created the correct connection structure.
+      \end{longtable}
+    ((*- endif -*))
+    ((*- if cell.metadata.get('table_v_func', {}) -*))
+      \begin{longtable}{lp{0.6\linewidth}}
+      \lstinline!PlotLayer()! 
+      &
+          Plot nodes in a layer.\\
+      \lstinline!PlotTargets()!
+      &
+          Plot all targets of a node in a given layer.\\
+      \lstinline!PlotKernel()!
+      &
+          Add indication of mask and kernel to plot of layer. It
+          does \emph{not} wrap masks and kernels with respect to periodic
+          boundary conditions. This function
+          is usually called by \lstinline!PlotTargets!.
+      \end{longtable}
+    ((*- endif -*))
+((* endblock markdowncell *))
+
+((* block bibliography *))
+	\bibliography{../../extras/bibliography/nest.bib}
+	\bibliographystyle{apalike}
+((* endblock bibliography *))
