@@ -1119,7 +1119,8 @@ def FindNearestElement(layers, locations, find_all=False):
     result = []  # collect one list per layer
     # loop over layers
     for lyr in layers:
-        els = nest.GetChildren((lyr, ))[0]
+        with nest.SuppressedDeprecationWarning('GetChildren'):
+            els = nest.GetChildren((lyr, ))[0]
 
         lyr_result = []
         # loop over locations
