@@ -23,9 +23,10 @@
 #ifndef VECTOR_UTIL_H
 #define VECTOR_UTIL_H
 
-#include <deque>
 #include <vector>
 #include <cstddef>
+
+#include "seque.h"
 
 namespace vector_util
 {
@@ -51,7 +52,7 @@ grow( std::vector< T >& v )
 
 template < typename T >
 inline void
-grow( std::deque< T >& v )
+grow( Seque< T >& v )
 {
 }
 

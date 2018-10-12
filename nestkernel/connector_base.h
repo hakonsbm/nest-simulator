@@ -28,13 +28,13 @@
 
 // C++ includes:
 #include <cstdlib>
-#include <deque>
 #include <vector>
 
 // Includes from libnestutil:
 #include "compose.hpp"
 #include "sort.h"
 #include "vector_util.h"
+#include "seque.h"
 
 // Includes from nestkernel:
 #include "common_synapse_properties.h"
@@ -175,7 +175,7 @@ public:
    * Sort connections according to source gids.
    */
   virtual void sort_connections( std::vector< Source >& ) = 0;
-  virtual void sort_connections( std::deque< Source >& ) = 0;
+  virtual void sort_connections( Seque< Source >& ) = 0;
 
   /**
    * Reserve memory for the specified amount of connections.
@@ -228,7 +228,7 @@ template < typename ConnectionT >
 class Connector : public ConnectorBase
 {
 private:
-  std::deque< ConnectionT > C_;
+  Seque< ConnectionT > C_;
   const synindex syn_id_;
 
 public:
@@ -454,7 +454,7 @@ public:
   void
   reserve( const size_t count )
   {
-    // C_.reserve( count );
+    //    C_.reserve( count );
   }
 
   void
@@ -464,7 +464,7 @@ public:
   }
 
   void
-  sort_connections( std::deque< Source >& sources )
+  sort_connections( Seque< Source >& sources )
   {
     nest::sort( sources, C_ );
   }
