@@ -1059,7 +1059,7 @@ nest::ConnectionManager::get_connections( const DictionaryDatum& params ) const
 
   // If connections have changed, (re-)build presynaptic infrastructure,
   // as this may involve sorting connections by source gids.
-  if ( have_connections_changed() )
+  if ( true )
   {
     if ( not kernel().simulation_manager.has_been_simulated() )
     {
