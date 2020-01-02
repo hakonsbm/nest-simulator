@@ -123,6 +123,7 @@ unused_names_errors=`python extras/check_unused_names.py`
 # Perfom static code analysis.
 c_files_with_errors=""
 python_files_with_errors=""
+date +"%H:%M:%S:%N"
 for f in $FILE_NAMES; do
 
   if [[ $FILES_TO_IGNORE =~ .*$f.* ]]; then
@@ -260,6 +261,8 @@ for f in $FILE_NAMES; do
       continue
   esac
 done
+
+date +"%H:%M:%S:%N"
 
 nlines_copyright_check=`echo -e $copyright_check_errors | sed -e 's/^ *//' | wc -l`
 if [ $nlines_copyright_check \> 1 ] || \
