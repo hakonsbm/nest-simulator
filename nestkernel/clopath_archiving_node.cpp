@@ -35,7 +35,7 @@ namespace nest
 
 nest::Clopath_Archiving_Node::Clopath_Archiving_Node()
   : Archiving_Node()
-  , A_LTD_( 14.0e-5 )
+  , A_LTD_( 14.0e-5)
   , A_LTP_( 8.0e-5 )
   , u_ref_squared_( 60.0 )
   , theta_plus_( -45.3 )
