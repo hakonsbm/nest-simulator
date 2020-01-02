@@ -41,7 +41,7 @@ namespace nest
 // member functions for Archiving_Node
 
 nest::Archiving_Node::Archiving_Node()
-  : n_incoming_( 0 )
+  : n_incoming_( 0)
   , Kminus_( 0.0 )
   , triplet_Kminus_( 0.0 )
   , tau_minus_( 20.0 )
