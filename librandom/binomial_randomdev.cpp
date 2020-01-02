@@ -63,7 +63,7 @@ librandom::BinomialRandomDev::BinomialRandomDev( double p_s, unsigned int n_s )
   , n_( n_s )
 {
   init_();
-  PrecomputeTable( n_s );
+  PrecomputeTable( n_s);
 }
 
 

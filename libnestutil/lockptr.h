@@ -233,7 +233,7 @@ public:
 
   lockPTR< D > operator=( D& s )
   {
-    *this = lockPTR< D >( s );
+    *this = lockPTR< D >( s);
     assert( not( obj->isdeletable() ) );
     return *this;
   }

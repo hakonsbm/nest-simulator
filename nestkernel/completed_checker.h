@@ -101,7 +101,7 @@ public:
 };
 
 inline void
-CompletedChecker::logical_and( const thread tid, const bool v )
+CompletedChecker::logical_and( const thread tid, const bool v)
 {
 // Use 'bitwise and', since 'logical and' is not supported by 'omp
 // atomic update'; yields same result for bool.

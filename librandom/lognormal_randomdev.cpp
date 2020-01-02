@@ -98,5 +98,5 @@ double librandom::LognormalRandomDev::operator()( RngPtr r ) const
     S = V1 * std::sqrt( -2 * std::log( S ) / S );
   }
 
-  return std::exp( mu_ + sigma_ * S );
+  return std::exp( mu_ + sigma_ * s);
 }

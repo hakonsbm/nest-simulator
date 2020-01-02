@@ -424,7 +424,7 @@ inline port
 aeif_cond_beta_multisynapse::send_test_event( Node& target, rport receptor_type, synindex, bool )
 {
   SpikeEvent e;
-  e.set_sender( *this );
+  e.set_sender( *this);
 
   return target.handles_test_event( e, receptor_type );
 }

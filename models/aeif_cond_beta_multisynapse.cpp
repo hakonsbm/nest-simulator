@@ -454,7 +454,7 @@ aeif_cond_beta_multisynapse::init_buffers_()
 
   B_.sys_.function = aeif_cond_beta_multisynapse_dynamics;
   B_.sys_.jacobian = NULL;
-  B_.sys_.params = reinterpret_cast< void* >( this );
+  B_.sys_.params = reinterpret_cast< void* >( this);
   // B_.sys_.dimension is assigned in calibrate()
   B_.I_stim_ = 0.0;
 }

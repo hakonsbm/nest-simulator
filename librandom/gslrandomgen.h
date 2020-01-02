@@ -96,7 +96,7 @@ private:
 inline void
 GslRandomGen::seed_( unsigned long s )
 {
-  gsl_rng_set( rng_, s );
+  gsl_rng_set( rng_, s);
 }
 
 inline double

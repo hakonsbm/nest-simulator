@@ -390,7 +390,7 @@ aeif_cond_alpha_multisynapse::aeif_cond_alpha_multisynapse( const aeif_cond_alph
   , S_( n.S_ )
   , B_( n.B_, *this )
 {
-  recordablesMap_.create( *this );
+  recordablesMap_.create( *this);
 }
 
 aeif_cond_alpha_multisynapse::~aeif_cond_alpha_multisynapse()

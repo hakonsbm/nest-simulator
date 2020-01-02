@@ -1388,7 +1388,7 @@ nest::FixedTotalNumberBuilder::connect_()
     }
 
     sum_dist += static_cast< double >( number_of_targets_on_vp[ k ] );
-    sum_partitions += static_cast< unsigned int >( num_conns_on_vp[ k ] );
+    sum_partitions += static_cast< unsigned int >( num_conns_on_vp[ k ]);
   }
 
 // end code adapted from gsl 1.8

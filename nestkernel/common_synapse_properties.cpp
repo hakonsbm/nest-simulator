@@ -49,7 +49,7 @@ CommonSynapseProperties::~CommonSynapseProperties()
 }
 
 void
-CommonSynapseProperties::get_status( DictionaryDatum& d ) const
+CommonSynapseProperties::get_status( DictionaryDatum& d) const
 {
   def< long >( d, names::weight_recorder, weight_recorder_ ? weight_recorder_->get_gid() : -1 );
 }

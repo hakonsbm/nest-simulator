@@ -266,7 +266,7 @@ ConnectionGeneratorModule::CGSetMask_cg_g_gFunction::execute( SLIInterpreter* i 
   GIDCollectionDatum sources = getValue< GIDCollectionDatum >( i->OStack.pick( 1 ) );
   GIDCollectionDatum targets = getValue< GIDCollectionDatum >( i->OStack.pick( 0 ) );
 
-  cg_set_masks( cg, sources, targets );
+  cg_set_masks( cg, sources, targets);
 
   i->OStack.pop( 3 );
   i->EStack.pop();

@@ -210,7 +210,7 @@ ac_generator::send_test_event( Node& target, rport receptor_type, synindex syn_i
   device_.enforce_single_syn_type( syn_id );
 
   CurrentEvent e;
-  e.set_sender( *this );
+  e.set_sender( *this);
 
   return target.handles_test_event( e, receptor_type );
 }

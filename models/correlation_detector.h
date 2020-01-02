@@ -326,7 +326,7 @@ inline void
 nest::correlation_detector::set_status( const DictionaryDatum& d )
 {
   Parameters_ ptmp = P_;
-  const bool reset_required = ptmp.set( d, *this );
+  const bool reset_required = ptmp.set( d, *this);
   State_ stmp = S_;
   stmp.set( d, P_, reset_required );
 

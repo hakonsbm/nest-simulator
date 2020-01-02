@@ -25,8 +25,8 @@
 namespace nest
 {
 
-CompletedChecker::CompletedChecker()
-  : a_( NULL )
+CompletedChecker::CompletedChecker( )
+  : a_( NULL)
   , size_( 0 )
 {
 }

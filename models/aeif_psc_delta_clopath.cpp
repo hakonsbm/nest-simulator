@@ -249,7 +249,7 @@ nest::aeif_psc_delta_clopath::Parameters_::set( const DictionaryDatum& d )
   updateValue< double >( d, names::Delta_T, Delta_T );
   updateValue< double >( d, names::tau_w, tau_w );
   updateValue< double >( d, names::tau_z, tau_z );
-  updateValue< double >( d, names::tau_plus, tau_plus );
+  updateValue< double >( d, names::tau_plus, tau_plus);
   updateValue< double >( d, names::tau_minus, tau_minus );
   updateValue< double >( d, names::tau_bar_bar, tau_bar_bar );
 

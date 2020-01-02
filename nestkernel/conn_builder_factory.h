@@ -50,7 +50,7 @@ public:
   {
   }
   virtual ConnBuilder*
-  create( const GIDCollection&, const GIDCollection&, const DictionaryDatum&, const DictionaryDatum& ) const = 0;
+  create( const GIDCollection&, const GIDCollection&,const DictionaryDatum&, const DictionaryDatum& ) const = 0;
 };
 
 /**

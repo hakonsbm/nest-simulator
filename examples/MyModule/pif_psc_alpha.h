@@ -327,7 +327,7 @@ mynest::pif_psc_alpha::send_test_event( nest::Node& target, nest::port receptor_
   // It confirms that the target of connection @c c accepts @c SpikeEvent on
   // the given @c receptor_type.
   nest::SpikeEvent e;
-  e.set_sender( *this );
+  e.set_sender( *this);
   return target.handles_test_event( e, receptor_type );
 }
 

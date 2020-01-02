@@ -65,7 +65,7 @@ cg_connect( ConnectionGeneratorDatum& cg,
   const index synmodel_id = static_cast< index >( synmodel );
   DictionaryDatum dummy_params = new Dictionary();
 
-  cg_set_masks( cg, source_gids, target_gids );
+  cg_set_masks( cg, source_gids, target_gids);
   cg->start();
 
   int source;

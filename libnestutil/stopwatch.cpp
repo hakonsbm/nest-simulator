@@ -26,7 +26,7 @@ namespace nest
 {
 std::ostream& operator<<( std::ostream& os, const Stopwatch& stopwatch )
 {
-  stopwatch.print( "", Stopwatch::SECONDS, os );
+  stopwatch.print( "", Stopwatch::SECONDS, os);
   return os;
 }
 }

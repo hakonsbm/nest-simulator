@@ -171,7 +171,7 @@ public:
    *
    * Note that data access with this operator is unchecked.
    */
-  value_type_& operator[]( const size_t pos );
+  value_type_& operator[]( const size_t pos);
 
   /**
    * @brief Subscript access to the data contained in the BlockVector.
