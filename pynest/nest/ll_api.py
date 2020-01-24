@@ -32,16 +32,10 @@ import os
 if 'linux' in sys.platform and 'Anaconda' in sys.version:
     import readline
 
-# This is a workaround to avoid segmentation faults when importing
-# scipy *after* nest. See https://github.com/numpy/numpy/issues/2521
-try:
-    import scipy
-except:
-    pass
-
 # Make MPI-enabled NEST import properly. The underlying problem is that the
 # shared object pynestkernel dynamically opens other libraries that open
 # yet other libraries.
+_default_dlopen_flags = sys.getdlopenflags()
 try:
     # Python 3.3 and later has flags in os
     sys.setdlopenflags(os.RTLD_NOW | os.RTLD_GLOBAL)
@@ -354,3 +348,6 @@ def init(argv):
 
 if 'DELAY_PYNEST_INIT' not in os.environ:
     init(sys.argv)
+
+# Reset dlopen flags to avoid segfaults when importing other modules.
+sys.setdlopenflags(_default_dlopen_flags)
