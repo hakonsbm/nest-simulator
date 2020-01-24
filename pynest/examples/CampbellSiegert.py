@@ -47,8 +47,7 @@ S. Schrader, Siegert implentation by T. Tetzlaff
 """
 
 ###############################################################################
-# First, we import all necessary modules for simulation and analysis. Scipy
-# should be imported before nest.
+# First, we import all necessary modules for simulation and analysis.
 
 from scipy.special import erf
 from scipy.optimize import fmin

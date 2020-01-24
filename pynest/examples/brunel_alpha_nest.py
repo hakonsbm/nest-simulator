@@ -49,8 +49,7 @@ See Also
 """
 
 ###############################################################################
-# Import all necessary modules for simulation, analysis and plotting. Scipy
-# should be imported before nest.
+# Import all necessary modules for simulation, analysis and plotting.
 
 from scipy.optimize import fsolve
 

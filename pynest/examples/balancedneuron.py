@@ -43,7 +43,7 @@ References
 
 ###############################################################################
 # First, we import all necessary modules for simulation, analysis and
-# plotting. Scipy should be imported before nest.
+# plotting.
 
 from scipy.optimize import bisect
 
