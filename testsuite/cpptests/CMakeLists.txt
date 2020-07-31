@@ -27,6 +27,8 @@ if ( HAVE_BOOST )
 
   if ( NOT APPLE )
     set_target_properties( run_all_cpptests PROPERTIES LINK_FLAGS "-Wl,--no-as-needed")
+  else ()
+    set_target_properties( run_all_cpptests PROPERTIES LINK_FLAGS "-undefined dynamic_lookup")
   endif ()
 
   target_include_directories( run_all_cpptests PRIVATE

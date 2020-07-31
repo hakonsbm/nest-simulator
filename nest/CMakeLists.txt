@@ -36,6 +36,12 @@ if ( NOT APPLE )
         PROPERTIES
         LINK_FLAGS "-Wl,--no-as-needed"
         )
+else ()
+    set_target_properties( nest
+        PROPERTIES
+        OUTPUT_NAME nest
+        LINK_FLAGS "-undefined dynamic_lookup"
+        )
 endif ()
 
 add_library( nest_lib ${nest_sources} )
@@ -50,6 +56,7 @@ else ()
     set_target_properties( nest_lib
         PROPERTIES
         OUTPUT_NAME nest
+        LINK_FLAGS "-undefined dynamic_lookup"
         )
 endif ()
 
@@ -58,7 +65,7 @@ target_link_libraries( nest
     ${SLI_MODULES} ${EXTERNAL_MODULE_LIBRARIES} OpenMP::OpenMP_CXX )
 
 target_link_libraries( nest_lib
-    nestutil nestkernel random sli_lib ${SLI_MODULES} ${EXTERNAL_MODULE_LIBRARIES} 
+    nestutil nestkernel random sli_lib ${SLI_MODULES} ${EXTERNAL_MODULE_LIBRARIES}
     OpenMP::OpenMP_CXX )
 
 target_include_directories( nest PRIVATE
