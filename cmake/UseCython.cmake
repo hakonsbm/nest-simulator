@@ -72,7 +72,7 @@ set( CYTHON_FLAGS "" CACHE STRING
 mark_as_advanced( CYTHON_ANNOTATE CYTHON_NO_DOCSTRINGS CYTHON_FLAGS )
 
 find_package( Cython REQUIRED )
-find_package( PythonLibs REQUIRED )
+find_package( Python 3.8 REQUIRED Interpreter Development )
 
 set( CYTHON_CXX_EXTENSION "cxx" )
 set( CYTHON_C_EXTENSION "c" )
@@ -195,13 +195,8 @@ function( compile_pyx _name generated_file )
     set( cython_debug_arg "--gdb" )
   endif ()
 
-  if ( "${PYTHONLIBS_VERSION_STRING}" MATCHES "^2." )
-    set( version_arg "-2" )
-  elseif ( "${PYTHONLIBS_VERSION_STRING}" MATCHES "^3." )
-    set( version_arg "-3" )
-  else ()
-    set( version_arg )
-  endif ()
+  # Set the version arg to 3 for Python 3
+  set( version_arg "-3" )
 
   # Include directory arguments.
   list( REMOVE_DUPLICATES cython_include_directories )
@@ -238,6 +233,7 @@ endfunction()
 # cython_add_module( <name> src1 src2 ... srcN )
 # Build the Cython Python module.
 function( cython_add_module _name )
+  include( FindPythonLibs )
   set( pyx_module_sources "" )
   set( other_module_sources "" )
   foreach ( _file ${ARGN} )
